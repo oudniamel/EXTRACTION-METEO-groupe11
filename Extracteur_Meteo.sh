@@ -12,6 +12,12 @@ else
     nom_ville=$1
 fi
 
+#!/bin/bash
+
+echo "Veuillez entrer le nom d'une ville :"
+read nom_ville
+>>>>>>> c81cc18 (Version1 : Ajout du script de base et de la documentation)
+
 # Récupération de la météo actuelle
 temperature_aujourdhui=$(curl -s "wttr.in/$nom_ville?format=%t")
 
@@ -21,6 +27,7 @@ temperature_demain=$(curl -s "wttr.in/$nom_ville?format=%t&tomorrow")
 # Date et heure actuelles
 jour_actuel=$(date '+%Y-%m-%d')
 heure_actuelle=$(date '+%H:%M')
+
 
 
 # Enregistrement des informations dans un fichier
@@ -37,3 +44,7 @@ DATE=$(date '+%Y-%m-%d - %H:%M')
 METEO_DATA=$(curl -s "wttr.in/$CITY?format=%t+%T")
 echo "$DATE - $CITY : $METEO_DATA" >> meteo.txt
 
+
+# Enregistrement des informations dans un fichier
+echo "$jour_actuel - $heure_actuelle - $nom_ville : $temperature_aujourdhui - $temperature_demain" >> previsions_meteo.txt
+>>>>>>> c81cc18 (Version1 : Ajout du script de base et de la documentation)
