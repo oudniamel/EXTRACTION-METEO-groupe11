@@ -1,0 +1,3 @@
+2024-10-30 - 00:23 - Paris : Température actuelle +15°C - Prévision demain +15°C - Vent ↙4km/h - Humidité 69% - Visibilité 
+2024-10-30 - 00:23 - Toulouse : Température actuelle +17°C - Prévision demain +17°C - Vent ←15km/h - Humidité 88% - Visibilité 
+2024-10-30 - 00:23 - Marseille : Température actuelle +19°C - Prévision demain +19°C - Vent ↙4km/h - Humidité 73% - Visibilité 
