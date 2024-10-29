@@ -1,7 +1,8 @@
 
+
 #!/bin/bash
 
-# Ville par défaut si aucun argument n'est fourni
+# Ville par defaut si aucun argument n'est fourni
 ville_defaut="Paris"
 
 # Vérification des arguments
@@ -30,4 +31,10 @@ fichier_historique="meteo_$(date '+%Y%m%d').txt"
 
 # Enregistrement des informations dans le fichier journalier
 echo "$jour_actuel - $heure_actuelle - $nom_ville : $temperature_aujourdhui - $temperature_demain" >> "$fichier_historique"
+#!/bin/bash
+CITY=${1:-"Toulouse"} 
+DATE=$(date '+%Y-%m-%d - %H:%M')
+METEO_DATA=$(curl -s "wttr.in/$CITY?format=%t+%T")
+echo "$DATE - $CITY : $METEO_DATA" >> meteo.txt
+
 

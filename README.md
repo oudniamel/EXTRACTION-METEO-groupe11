@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 # EXTRACTION-METEO-groupe11
+=======
+>>>>>>> ameloudni
 Extraction de Données Météorologiques
 
 
