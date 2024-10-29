@@ -12,6 +12,9 @@ fi
 
 # Récupération de la météo actuelle
 temperature_aujourdhui=$(curl -s "wttr.in/$nom_ville?format=%t")
+vitesse_vent=$(curl -s "wttr.in/$nom_ville?format=%w")
+humidite=$(curl -s "wttr.in/$nom_ville?format=%h")
+visibilite=$(curl -s "wttr.in/$nom_ville?format=%V")
 
 # Récupération des prévisions pour demain
 temperature_demain=$(curl -s "wttr.in/$nom_ville?format=%t&tomorrow")
@@ -24,4 +27,4 @@ heure_actuelle=$(date '+%H:%M')
 fichier_historique="meteo_$(date '+%Y%m%d').txt"
 
 # Enregistrement des informations dans le fichier journalier
-echo "$jour_actuel - $heure_actuelle - $nom_ville : $temperature_aujourdhui - $temperature_demain" >> "$fichier_historique"
+echo "$jour_actuel - $heure_actuelle - $nom_ville : $temperature_aujourdhui - $vitesse_vent - $humidite - $visibilite - $temperature_demain" >> "$fichier_historique"
