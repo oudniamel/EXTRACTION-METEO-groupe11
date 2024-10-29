@@ -10,4 +10,8 @@ Cette premiere version du projet vise a extraire des donnees meteorologiques d'u
 ## Utilisation
 Executez la commande suivante pour lancer le script :
 ```bash
+<<<<<<< HEAD
 ./Extracteur_Meteo.sh [ville]
+=======
+./Extracteur_Meteo.sh [ville]
+>>>>>>> ameloudni
