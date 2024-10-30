@@ -24,6 +24,12 @@ visibilite=$(curl -s "wttr.in/$nom_ville?format=%v")                  # Visibili
 jour_actuel=$(date '+%Y-%m-%d')
 heure_actuelle=$(date '+%H:%M')
 
+# Ville par défault sur format json
+if [ "$nom_ville" == "json" ]; then
+    nom_ville=$ville_defaut
+    format_sortie="json"
+fi
+
 if [ "$format_sortie" == "json" ]; then
     # Création du fichier JSON journalier avec la date (format : meteo_ville_YYYYMMDD.json)
     fichier_json="meteo_${nom_ville}_$(date '+%Y%m%d').json"
