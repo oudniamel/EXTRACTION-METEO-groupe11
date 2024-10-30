@@ -1,8 +1,6 @@
-
-
 #!/bin/bash
 
-# Ville par defaut si aucun argument n'est fourni
+# Ville par défaut si aucun argument n'est fourni
 ville_defaut="Paris"
 
 # Vérification des arguments
@@ -12,39 +10,45 @@ else
     nom_ville=$1
 fi
 
-#!/bin/bash
+# Format de sortie par défaut (texte ou JSON)
+format_sortie=${2:-"txt"}
 
-echo "Veuillez entrer le nom d'une ville :"
-read nom_ville
->>>>>>> c81cc18 (Version1 : Ajout du script de base et de la documentation)
-
-# Récupération de la météo actuelle
-temperature_aujourdhui=$(curl -s "wttr.in/$nom_ville?format=%t")
-
-# Récupération des prévisions pour demain
-temperature_demain=$(curl -s "wttr.in/$nom_ville?format=%t&tomorrow")
+# Récupération des informations météo
+temperature_aujourdhui=$(curl -s "wttr.in/$nom_ville?format=%t")      # Température actuelle
+temperature_demain=$(curl -s "wttr.in/$nom_ville?format=%T")          # Prévision pour demain
+vitesse_vent=$(curl -s "wttr.in/$nom_ville?format=%w")                # Vitesse du vent
+humidite=$(curl -s "wttr.in/$nom_ville?format=%h")                    # Humidité
+visibilite=$(curl -s "wttr.in/$nom_ville?format=%v")                  # Visibilité
 
 # Date et heure actuelles
 jour_actuel=$(date '+%Y-%m-%d')
 heure_actuelle=$(date '+%H:%M')
 
+# Ville par défault sur format json
+if [ "$nom_ville" == "json" ]; then
+    nom_ville=$ville_defaut
+    format_sortie="json"
+fi
 
+if [ "$format_sortie" == "json" ]; then
+    # Création du fichier JSON journalier avec la date (format : meteo_ville_YYYYMMDD.json)
+    fichier_json="meteo_${nom_ville}_$(date '+%Y%m%d').json"
+    echo "{
+    \"date\": \"$jour_actuel\",
+    \"heure\": \"$heure_actuelle\",
+    \"ville\": \"$nom_ville\",
+    \"temperature\": \"$temperature_aujourdhui\",
+    \"prevision\": \"$temperature_demain\",
+    \"vent\": \"$vitesse_vent\",
+    \"humidite\": \"$humidite\",
+    \"visibilite\": \"$visibilite\"
+}" > "$fichier_json"
+    echo "Les données météo pour $nom_ville ont été enregistrées en JSON dans $fichier_json."
 
-# Enregistrement des informations dans un fichier
-echo "$jour_actuel - $heure_actuelle - $nom_ville : $temperature_aujourdhui - $temperature_demain" >> previsions_meteo.txt
+else
+    # Création du fichier journalier en texte avec la date (format : meteo_YYYYMMDD.txt)
+    fichier_historique="meteo_$(date '+%Y%m%d').txt"
+    echo "$jour_actuel - $heure_actuelle - $nom_ville : Température actuelle $temperature_aujourdhui - Prévision demai$
+    echo "Les données météo pour $nom_ville ont été enregistrées en texte dans $fichier_historique."
+fi
 
-# Création du fichier journalier avec la date (format : meteo_YYYYMMDD.txt)
-fichier_historique="meteo_$(date '+%Y%m%d').txt"
-
-# Enregistrement des informations dans le fichier journalier
-echo "$jour_actuel - $heure_actuelle - $nom_ville : $temperature_aujourdhui - $temperature_demain" >> "$fichier_historique"
-#!/bin/bash
-CITY=${1:-"Toulouse"} 
-DATE=$(date '+%Y-%m-%d - %H:%M')
-METEO_DATA=$(curl -s "wttr.in/$CITY?format=%t+%T")
-echo "$DATE - $CITY : $METEO_DATA" >> meteo.txt
-
-
-# Enregistrement des informations dans un fichier
-echo "$jour_actuel - $heure_actuelle - $nom_ville : $temperature_aujourdhui - $temperature_demain" >> previsions_meteo.txt
->>>>>>> c81cc18 (Version1 : Ajout du script de base et de la documentation)
